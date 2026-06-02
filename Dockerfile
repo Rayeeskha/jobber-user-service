@@ -1,4 +1,5 @@
 FROM node:21-alpine3.18 as builder
+ARG NPM_TOKEN
 
 WORKDIR /app
 COPY package*.json ./
@@ -9,6 +10,7 @@ RUN npm install -g npm@latest
 RUN npm ci && npm run build
 
 FROM node:21-alpine3.18
+ARG NPM_TOKEN
 
 WORKDIR /app
 RUN apk add --no-cache curl
